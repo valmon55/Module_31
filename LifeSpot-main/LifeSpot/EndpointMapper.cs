@@ -43,6 +43,23 @@ namespace LifeSpot
             }
         }
         /// <summary>
+        ///  Маппинг картинок
+        /// </summary>
+        public static void MapPictures(this IEndpointRouteBuilder builder)
+        {
+            var pictureFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
+
+            foreach (var fileName in pictureFiles)
+            {
+                builder.MapGet($"/Views/Shared/slider/{fileName}", async context =>
+                {
+                    var picturesPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider", fileName);
+                    var pictures = await File.ReadAllTextAsync(picturesPath);
+                    await context.Response.WriteAsync(pictures);
+                });
+            }
+        }
+        /// <summary>
         ///  Маппинг Html-страниц
         /// </summary>
         public static void MapHtml(this IEndpointRouteBuilder builder)
