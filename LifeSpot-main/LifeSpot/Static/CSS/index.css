@@ -52,7 +52,13 @@ header{
 #header-index{
     color: #44453f;
 }
-
+#slider{
+    width: 50%;
+    height: 40%;
+    padding: 2,4,2,4;
+    margin: 10;
+    border: dotted;
+}
 /* Стили футера */
 footer {
     position: relative;

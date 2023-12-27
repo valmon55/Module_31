@@ -24,6 +24,7 @@ namespace LifeSpot
             // Загружаем отдельные элементы для вставки в шаблон: боковое миню и футер
             string footerHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "footer.html"));
             string sideBarHtml =  File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
+            string sliderHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider.html"));
 
             app.UseEndpoints(endpoints =>
             {
@@ -58,6 +59,7 @@ namespace LifeSpot
                     // Загружаем шаблон страницы, вставляя в него элементы
                     var html =  new StringBuilder(await File.ReadAllTextAsync(viewPath))
                         .Replace("<!--SIDEBAR-->", sideBarHtml)
+                        .Replace("<!--SLIDER-->", sliderHtml)
                         .Replace("<!--FOOTER-->", footerHtml);
                     
                     await context.Response.WriteAsync(html.ToString());
