@@ -27,7 +27,7 @@ namespace LifeSpot
 
                 endpoints.MapCss();
                 endpoints.MapJs();
-                endpoints.MapPictures();
+                EndpointMapper.MapPictures(app, env);
                 endpoints.MapHtml();
             });
         }

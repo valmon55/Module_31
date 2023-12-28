@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System.Text;
 
@@ -45,19 +47,13 @@ namespace LifeSpot
         /// <summary>
         ///  Маппинг картинок
         /// </summary>
-        public static void MapPictures(this IEndpointRouteBuilder builder)
+        public static void MapPictures(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var pictureFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
-
-            foreach (var fileName in pictureFiles)
+            app.UseStaticFiles(new StaticFileOptions
             {
-                builder.MapGet($"/Views/Shared/slider/{fileName}", async context =>
-                {
-                    var picturesPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider", fileName);
-                    var pictures = await File.ReadAllTextAsync(picturesPath);
-                    await context.Response.WriteAsync(pictures);
-                });
-            }
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Views", "Shared", "slider")),
+                RequestPath = "/Views/Shared/slider"
+            });
         }
         /// <summary>
         ///  Маппинг Html-страниц
