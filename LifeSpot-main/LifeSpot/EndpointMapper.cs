@@ -15,7 +15,7 @@ namespace LifeSpot
         /// </summary>
         public static void MapCss(this IEndpointRouteBuilder builder)
         {
-            var cssFiles = new[] { "index.css" };
+            var cssFiles = new[] { "index.css", "slider.css" };
 
             foreach (var fileName in cssFiles)
             {
@@ -32,7 +32,7 @@ namespace LifeSpot
         /// </summary>
         public static void MapJs(this IEndpointRouteBuilder builder)
         {
-            var jsFiles = new[] { "index.js", "testing.js", "about.js" };
+            var jsFiles = new[] { "index.js", "testing.js", "about.js", "slider.js" };
 
             foreach (var fileName in jsFiles)
             {
